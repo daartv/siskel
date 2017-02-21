@@ -1,3 +1,10 @@
+/*var addEventSystem = function (target) {
+  target._reactionsTo = {};
+  target.on = function (e,cb) {
+    this._reactionsTo[e] = this._reactionsTo[e];
+  } 
+};*/
+
 var Movie = Backbone.Model.extend({
 
   defaults: {
@@ -6,6 +13,11 @@ var Movie = Backbone.Model.extend({
 
   toggleLike: function() {
     // your code here
+    if (this.get('like')) {
+      this.set('like', false);
+    } else {
+      this.set('like', true);
+    }
   }
 
 });
@@ -15,13 +27,19 @@ var Movies = Backbone.Collection.extend({
   model: Movie,
 
   initialize: function() {
-    // your code here
+   // this.model.on('change', this.sort);
   },
 
   comparator: 'title',
 
   sortByField: function(field) {
     // your code here
+    this.comparator = field;
+    this.sort();
+  },
+
+  sort: function() {
+
   }
 
 });
